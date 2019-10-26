@@ -4,6 +4,7 @@ import {
     compose,
     applyMiddleware
 } from 'redux'
+import thunk from 'redux-thunk'
 
 const reducers = combineReducers({
 });

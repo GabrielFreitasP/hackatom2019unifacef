@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {
     View,
     Text
@@ -26,4 +27,4 @@ const mapStateToProps = () => ({
 const mapDispatchToProps = (dispatch) => ({
 })
 
-export default connect(null, null)(SignInScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen)

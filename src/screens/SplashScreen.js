@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Styles from '../styles/screens/SplashStyle'
 import {
     View,
-    Image
+    Text,
 } from 'react-native'
 
 class SplashScreen extends React.Component {
@@ -24,7 +24,7 @@ class SplashScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.props.navigation.navigate('HomeIn');
+        // this.props.navigation.navigate('HomeIn');
     }
 
     render() {
