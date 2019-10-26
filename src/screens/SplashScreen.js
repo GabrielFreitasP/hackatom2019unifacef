@@ -24,7 +24,7 @@ class SplashScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.props.navigation.navigate('Translator');
+        this.props.navigation.navigate('SignIn');
     }
 
     render() {

@@ -3,16 +3,14 @@ import { createStackNavigator } from 'react-navigation-stack'
 import SplashScreen from './screens/SplashScreen'
 import SignInScreen from './screens/SignInScreen'
 import HomeScreen from './screens/HomeScreen'
-import RegisterScreen from './screens/RegisterScreen';
-import HomeInScreen from './screens/HomeInScreen';
-import TranslatorScreen from './screens/TranslatorScreen';
+import RegisterScreen from './screens/RegisterScreen'
+import TranslatorScreen from './screens/TranslatorScreen'
 
 const AuthStack = createStackNavigator({
-    HomeIn: HomeInScreen,
     SignIn: SignInScreen,
     Register: RegisterScreen,
 }, {
-    initialRouteName: 'HomeIn'
+    initialRouteName: 'SignIn'
 })
 
 const AppStack = createStackNavigator({
