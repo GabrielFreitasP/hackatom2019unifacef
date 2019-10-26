@@ -5,7 +5,6 @@ import {
 } from './actionTypes'
 import axios from 'axios'
 import { setMessage } from './message'
-import { _removeQRCodeAssociated } from './associatedQRCode'
 
 const URL_BASE = 'http://10.0.4.115:8081/api/v1'
 

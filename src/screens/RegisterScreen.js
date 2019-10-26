@@ -2,11 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {
     View,
-    Text,
-    Button
+    Text
 } from 'react-native'
 
-class HomeScreen extends React.Component {
+class RegisterScreen extends React.Component {
     static navigationOptions = { header: null }
 
     constructor(props){
@@ -16,8 +15,7 @@ class HomeScreen extends React.Component {
     render() {
         return (
             <View>
-                <Text>Hackathon 2019</Text>
-                <Button title="Tradutor" onPress={() => this.props.navigation.navigate('Translator')} />
+                <Text>RegisterScreen</Text>
             </View>
         )
     }
@@ -29,4 +27,4 @@ const mapStateToProps = () => ({
 const mapDispatchToProps = (dispatch) => ({
 })
 
-export default connect(null, null)(HomeScreen)
+export default connect(null, null)(RegisterScreen)
