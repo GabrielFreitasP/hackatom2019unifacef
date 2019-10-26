@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import Styles from '../styles/screens/TranslatorStyle'
 import {
     View,
-    Text,
     TextInput,
     ActivityIndicator,
-    Button
+    Button, 
+    Text
 } from 'react-native'
 import Video from 'react-native-video';
 import { translate, clearTranslator } from '../store/actions/translator'
@@ -24,7 +24,7 @@ class TranslatorScreen extends React.Component {
 
     componentDidMount = () => {
         this.props.clearTranslator()
-        this.translate(this.state.text)
+        // this.translate(this.state.text)
     }
 
     translate = (text) => {
@@ -49,13 +49,11 @@ class TranslatorScreen extends React.Component {
                 )
             } else if (this.props.translator.url) {
                 return (
-                    <View style={styles.containerVideo}>
-                        <Video 
-                            style={styles.backgroundVideo}
-                            source={{ uri: this.props.translator.url }}
-                            repeat={true}
-                            ref={(ref) => { this.player = ref }} />
-                    </View>
+                    <Video 
+                        style={styles.backgroundVideo}
+                        source={{ uri: this.props.translator.url }}
+                        repeat={true}
+                        ref={(ref) => { this.player = ref }} />
                 )
             }
         }
@@ -67,13 +65,20 @@ class TranslatorScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}>                
-                { this.renderVideo() }
-                <TextInput
-                    style={styles.textInput}
-                    onChangeText={text => this.onChangeText(text)}
-                    value={this.state.text} />
-                <Button title="Buscar" onPress={() => this.onPress()} />
+            <View style={styles.container}>   
+                <View style={styles.containerVideo}>             
+                    { this.renderVideo() }
+                </View>
+                <View style={styles.containerInput}>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={text => this.onChangeText(text)}
+                        value={this.state.text} />
+                    <Button 
+                        style={styles.button}
+                        title="Traduzir"
+                        onPress={() => this.onPress()} />
+                </View>                
             </View>            
         )
     }
