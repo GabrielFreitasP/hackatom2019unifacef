@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {
     View,
-    Text
+    Text,
+    Button
 } from 'react-native'
 
 class HomeInScreen extends React.Component {
@@ -16,6 +17,7 @@ class HomeInScreen extends React.Component {
         return (
             <View>
                 <Text>HomeInScreen</Text>
+                <Button title="Entrar" onPress={() => this.props.navigation.navigate('Home')} />
             </View>
         )
     }

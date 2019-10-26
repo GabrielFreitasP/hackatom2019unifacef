@@ -5,8 +5,12 @@ import {
     applyMiddleware
 } from 'redux'
 import thunk from 'redux-thunk'
+import messageReducer from './reducers/message'
+import userReducer from './reducers/user'
 
 const reducers = combineReducers({
+    message: messageReducer,
+    user: userReducer
 });
 
 const storeConfig = () => {

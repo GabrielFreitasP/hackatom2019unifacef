@@ -24,7 +24,7 @@ class SplashScreen extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.navigation.navigate('HomeIn');
+        this.props.navigation.navigate('HomeIn');
     }
 
     render() {
