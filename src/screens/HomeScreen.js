@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {
     View,
-    Text
+    Text,
+    Button
 } from 'react-native'
 
 class HomeScreen extends React.Component {
@@ -16,6 +17,7 @@ class HomeScreen extends React.Component {
         return (
             <View>
                 <Text>Hackathon 2019</Text>
+                <Button title="Tradutor" onPress={() => this.props.navigation.navigate('Translator')} />
             </View>
         )
     }

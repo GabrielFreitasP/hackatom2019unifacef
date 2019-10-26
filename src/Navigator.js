@@ -5,6 +5,7 @@ import SignInScreen from './screens/SignInScreen'
 import HomeScreen from './screens/HomeScreen'
 import RegisterScreen from './screens/RegisterScreen';
 import HomeInScreen from './screens/HomeInScreen';
+import TranslatorScreen from './screens/TranslatorScreen';
 
 const AuthStack = createStackNavigator({
     HomeIn: HomeInScreen,
@@ -16,6 +17,7 @@ const AuthStack = createStackNavigator({
 
 const AppStack = createStackNavigator({
     Home: HomeScreen,
+    Translator: TranslatorScreen,
 }, {
     initialRouteName: 'Home'
 })

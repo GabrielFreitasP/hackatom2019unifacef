@@ -4,7 +4,6 @@ import {
     LOADING_USER,
 } from './actionTypes'
 import { setMessage } from './message'
-import { _removeQRCodeAssociated } from './associatedQRCode'
 
 const _setUser = (user) => ({
     type: SET_USER,
