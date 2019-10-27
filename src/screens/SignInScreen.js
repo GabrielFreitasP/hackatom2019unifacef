@@ -27,7 +27,7 @@ class SignInScreen extends React.Component {
             this.loadingButton.showLoading(false);
         }
         if (prevProps.user.id == null && this.props.user.id != null) {
-            this.props.navigation.navigate('Questions');
+            this.props.navigation.navigate('Tabs');
         }
     }
 

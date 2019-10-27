@@ -14,10 +14,6 @@ export default () => StyleSheet.create({
         height: 25,
         backgroundColor: 'transparent'
     },
-    title: {
-        fontSize: 14,
-        color: '#adaaaa'
-    },
     positionContainer: {
         width: 40,
         height: 40,
