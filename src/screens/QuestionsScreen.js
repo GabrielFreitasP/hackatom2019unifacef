@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
+    BackHandler,
     View,
     Text,
     Button
@@ -14,6 +15,23 @@ class QuestionsScreen extends React.Component {
 
     constructor(props){
         super(props)
+    }
+
+    componentDidMount() {
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    }
+    
+    componentWillUnmount() {
+        this.backHandler.remove()
+    }
+
+    handleBackPress = () => {
+        this.goBack(); // works best when the goBack is async
+        return true;
+    }
+      
+    goBack = () => {
+        this.props.navigation.navigate('Tabs')
     }
 
     render() {

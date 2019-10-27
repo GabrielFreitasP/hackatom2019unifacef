@@ -25,7 +25,7 @@ class SplashScreen extends React.Component {
 
     componentDidMount() {
         if (this.props.user.id) {
-            this.props.navigation.navigate('Questions');
+            this.props.navigation.navigate('Tabs');
         } else {
             this.props.navigation.navigate('SignIn');
         }

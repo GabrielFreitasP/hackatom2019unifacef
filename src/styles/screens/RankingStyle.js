@@ -1,22 +1,10 @@
 import { StyleSheet } from 'react-native'
 
-export default (colorPrimary) => StyleSheet.create({
-    lineTransaction: {
-        width: '100%',
-        paddingLeft: 30,
-        paddingRight: 30,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
+export default (colorPrimary) => StyleSheet.create({    
     lineVertical: {
         width: 1,
         height: 25,
         backgroundColor: 'transparent'
-    },
-    title: {
-        fontSize: 14,
-        color: '#adaaaa'
     },
     positionContainer: {
         width: 40,

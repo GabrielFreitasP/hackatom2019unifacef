@@ -49,12 +49,6 @@ class RankingScreen extends React.Component {
     _renderRanking = () => {
         return (
             <View style={{ flex: 1 }}>
-                <View style={styles.lineTransaction}>
-                    <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center', marginLeft: 40 }}>
-                        <Text style={[styles.title, { flex: 1, paddingLeft: 10 }]}>Nome</Text>
-                        <Text style={[styles.title, { flex: 1, textAlign: 'right' }]}>Pontuação</Text>
-                    </View>
-                </View>
                 <FlatList
                     keyExtractor={(item, index) => index.toString()}
                     data={this.props.ranking}

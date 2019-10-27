@@ -6,6 +6,7 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import Icon from 'react-native-vector-icons/FontAwesome'
 import SplashScreen from './screens/SplashScreen'
 import SignInScreen from './screens/SignInScreen'
+import LevelsScreen from './screens/LevelsScreen'
 import QuestionsScreen from './screens/QuestionsScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import TranslatorScreen from './screens/TranslatorScreen'
@@ -19,22 +20,22 @@ const AuthStack = createStackNavigator({
     initialRouteName: 'SignIn'
 })
 
-const AppStack = createMaterialBottomTabNavigator({
-    Questions: {
-        screen: QuestionsScreen,
+const TabsStack = createMaterialBottomTabNavigator({
+    Learn: {
+        screen: LevelsScreen,
         navigationOptions: {
-            title: 'Questions',
-            tabBarLabel: 'Perguntas',
+            title: 'Learn',
+            tabBarLabel: 'Aprenda',
             tabBarColor: '#f43973',
             tabBarIcon: ({ tintColor, focused }) => (
-                <Icon style={[{color: tintColor}]} size={22} name={'question'}/>  
+                <Icon style={[{color: tintColor}]} size={22} name={'gamepad'}/>  
             )
         }
     },
     Translator: {
         screen: TranslatorScreen,
         navigationOptions: {
-            title: 'Tradutor',
+            title: 'Translator',
             tabBarLabel: 'Tradutor',
             tabBarColor: '#08b3aa',
             tabBarIcon: ({ tintColor, focused }) => (
@@ -65,7 +66,14 @@ const AppStack = createMaterialBottomTabNavigator({
         }
     },
 }, {
-    initialRouteName: 'Questions'    
+    initialRouteName: 'Learn'    
+})
+
+const AppStack = createSwitchNavigator({
+    Tabs: TabsStack,
+    Questions: QuestionsScreen,
+}, {
+    initialRouteName: 'Tabs'
 })
 
 const RootSwitch = createSwitchNavigator({
