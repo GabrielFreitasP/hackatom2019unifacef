@@ -66,6 +66,18 @@ class SignInScreen extends React.Component {
                         borderRadius={100}
                         onPress={this.login.bind(this)}/>
                 </View>
+                <View style={styles.containerButtons}>
+                    <AnimateLoadingButton
+                        ref={c => {}}
+                        width={300}
+                        height={50}
+                        title="Registrar"
+                        titleFontSize={20}
+                        titleColor="rgb(255,255,255)"
+                        backgroundColor="#08b3aa"
+                        borderRadius={100}
+                        onPress={this.login.bind(this)}/>
+                </View>
             </View >
         )
     }

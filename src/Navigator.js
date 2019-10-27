@@ -2,12 +2,13 @@ import React from 'react'
 import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import SplashScreen from './screens/SplashScreen'
 import SignInScreen from './screens/SignInScreen'
 import HomeScreen from './screens/HomeScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import TranslatorScreen from './screens/TranslatorScreen'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import ProfileScreen from './screens/ProfileScreen'
 
 const AuthStack = createStackNavigator({
     SignIn: SignInScreen,
@@ -34,6 +35,16 @@ const AppStack = createMaterialBottomTabNavigator ({
             tabBarLabel: 'Tradutor',
             tabBarIcon: ({ tintColor, focused }) => (
                 <Icon size={30} name={'home'} style={{ color: tintColor }} />
+            )
+        }
+    },
+    Profile: { 
+        screen: ProfileScreen,
+        navigationOptions: {
+            title: 'Perfil',
+            tabBarLabel: 'Perfil',
+            tabBarIcon: ({ tintColor, focused }) => (
+                <Icon size={30} name={'user'} style={{ color: tintColor }} />
             )
         }
     },
