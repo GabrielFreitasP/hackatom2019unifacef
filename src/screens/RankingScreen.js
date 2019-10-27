@@ -4,8 +4,11 @@ import {
     View,
     Text
 } from 'react-native'
+import Header from '../components/Header'
 
-class ProfileScreen extends React.Component {
+const color = '#e55b20'
+
+class RankingScreen extends React.Component {
     static navigationOptions = { header: null }
 
     constructor(props){
@@ -15,7 +18,10 @@ class ProfileScreen extends React.Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <Text>ProfileScreen</Text>
+                <Header title="Ranking" color={color} />
+                <View>
+                    <Text>Ranking</Text>
+                </View>
             </View>
         )
     }
@@ -27,4 +33,4 @@ const mapStateToProps = () => ({
 const mapDispatchToProps = (dispatch) => ({
 })
 
-export default connect(null, null)(ProfileScreen)
+export default connect(null, null)(RankingScreen)

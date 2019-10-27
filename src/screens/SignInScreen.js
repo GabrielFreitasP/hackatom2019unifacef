@@ -28,7 +28,7 @@ class SignInScreen extends React.Component {
         }
         if (prevProps.user.id == null && this.props.user.id != null) {
             console.log('redirect');
-            this.props.navigation.navigate('Home');
+            this.props.navigation.navigate('Questions');
         }
     }
 

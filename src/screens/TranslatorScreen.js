@@ -8,8 +8,11 @@ import {
     Button, 
     Text
 } from 'react-native'
-import Video from 'react-native-video';
+import Video from 'react-native-video'
+import Header from '../components/Header'
 import { translate, clearTranslator } from '../store/actions/translator'
+
+const color = '#08b3aa'
 
 class TranslatorScreen extends React.Component {
     static navigationOptions = { header: null }    
@@ -17,7 +20,7 @@ class TranslatorScreen extends React.Component {
     constructor(props){
         super(props)
 
-        this.state = {
+        this.state = {            
             text: 'Hackaton'
         }
     }
@@ -55,32 +58,38 @@ class TranslatorScreen extends React.Component {
                         repeat={true}
                         ref={(ref) => { this.player = ref }} />
                 )
+            } else {
+                return (
+                    <Text>Digite algo a baixo para traduzir em libras</Text>
+                )
             }
+        } else {
+            return (
+                <Text>Digite algo a baixo para traduzir em libras</Text>
+            )
         }
-        
-        return (
-            <Text>Digite algo a baixo para traduzir em libras</Text>
-        )        
     }
 
     render() {
         return (
-            <View style={styles.container}>   
-                <View style={styles.containerVideo}>             
-                    { this.renderVideo() }
+            <View style={{ flex: 1 }}>
+                <Header title="Tradutor" color={color} />
+                <View style={styles.container}>
+                    <View style={styles.containerVideo}>
+                        { this.renderVideo() }
+                    </View>
+                    <View style={styles.containerInput}>
+                        <TextInput
+                            style={styles.input}
+                            onChangeText={text => this.onChangeText(text)}
+                            value={this.state.text} />
+                        <Button
+                            color={color}
+                            title="Traduzir"
+                            onPress={() => this.onPress()} />
+                    </View>
                 </View>
-                <View style={styles.containerInput}>
-                    <TextInput
-                        style={styles.input}
-                        onChangeText={text => this.onChangeText(text)}
-                        value={this.state.text} />
-                    <Button 
-                        style={styles.button}
-                        color={'#08b3aa'}
-                        title="Traduzir"
-                        onPress={() => this.onPress()} />
-                </View>                
-            </View>            
+            </View>
         )
     }
 }
