@@ -15,11 +15,10 @@ export default (color) => StyleSheet.create({
     containerVideo: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: 280,
-        height: 201,
+        width: 370,
+        height: 250,
     },
     backgroundVideo: {
-        backgroundColor: 'black',
         position: 'absolute',
         top: 0,
         left: 0,

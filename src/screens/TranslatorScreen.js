@@ -23,7 +23,7 @@ class TranslatorScreen extends React.Component {
         super(props)
 
         this.state = {
-            text: 'Hackaton',
+            text: '',
             paused: false
         }
     }
@@ -77,9 +77,7 @@ class TranslatorScreen extends React.Component {
                                 source={{ uri: this.props.translator.url }}
                                 repeat={true}
                                 ref={(ref) => { this.player = ref }}
-                                maxBitRate={2000000}
-                                paused={this.state.paused}
-                                fullscreen={true} />
+                                paused={this.state.paused} />
                         </View>
                         <TouchableOpacity onPress={() => { this.setState({ paused: !this.state.paused }) }}>
                             {this.renderPause()}

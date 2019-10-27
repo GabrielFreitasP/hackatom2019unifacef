@@ -13,9 +13,6 @@ import Header from '../components/Header'
 import Styles from '../styles/screens/QuestionsStyle'
 import { getQuestions, putQuestions } from '../store/actions/questions'
 import { setMessage } from '../store/actions/message'
-import video1 from '../assets/videos/um.mp4'
-import video2 from '../assets/videos/dois.mp4'
-import video3 from '../assets/videos/tres.mp4'
 
 const color = '#f43973'
 
@@ -101,11 +98,11 @@ class QuestionsScreen extends React.Component {
         if (!this.props.isLoading && question) {
             let uri
             if (question.id == 1) {
-                uri = video1
+                uri = require('../assets/videos/um.mp4')
             } else if (question.id == 2) {
-                uri = video2
+                uri = require('../assets/videos/dois.mp4')
             } else if (question.id == 3) {
-                uri = video3
+                uri = require('../assets/videos/tres.mp4')
             }
             console.log(uri)
 
@@ -115,7 +112,7 @@ class QuestionsScreen extends React.Component {
                     <View style={styles.containerVideo}>
                         <Video
                             style={styles.backgroundVideo}
-                            source={{ uri }}
+                            source={ uri }
                             repeat={true}
                             ref={(ref) => { this.player = ref }} />
                     </View>
