@@ -6,20 +6,23 @@ import {
     Text,
     ActivityIndicator,
     TouchableOpacity,
-    Button
+    FlatList
 } from 'react-native'
-// import { WebView } from 'react-native-webview'
 import Video from 'react-native-video'
 import Header from '../components/Header'
 import Styles from '../styles/screens/QuestionsStyle'
-import { getQuestions } from '../store/actions/questions'
+import { getQuestions, putQuestions } from '../store/actions/questions'
+import { setMessage } from '../store/actions/message'
+import video1 from '../assets/videos/um.mp4'
+import video2 from '../assets/videos/dois.mp4'
+import video3 from '../assets/videos/tres.mp4'
 
 const color = '#f43973'
 
 class QuestionsScreen extends React.Component {
     static navigationOptions = { header: null }
 
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.state = {
@@ -29,28 +32,45 @@ class QuestionsScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
         this.props.getQuestions()
     }
-    
+
     componentWillUnmount() {
         this.backHandler.remove()
     }
 
     handleBackPress = () => {
-        this.goBack(); // works best when the goBack is async
-        return true;
+        this.goBack()
+        return true
     }
-      
+
     goBack = () => {
         this.props.navigation.navigate('Tabs')
     }
 
     reply = () => {
         if (this.props.questions.length > this.state.questionNumber && this.state.response) {
-            this.setState({
-                questionNumber: this.state.questionNumber + 1
-            })
+            const lastQuestion = this.state.questionNumber == this.props.questions.length - 1
+
+            if (this.state.response === this.props.questions[this.state.questionNumber].CorrectAlternative) {
+                this.props.putQuestions(this.props.questions[this.state.questionNumber].Points)
+                if (lastQuestion) {
+                    this.props.setMessage('Eba', 'Parabéns, você liberou um novo nível!')
+                }
+            } else {
+                this.props.setMessage('Ops', 'Essa não é a alternativa correta. Tente novamente para prosseguir.')
+                return
+            }
+
+            if (lastQuestion) {
+                this.goBack()
+            } else {
+                this.setState({
+                    response: '',
+                    questionNumber: this.state.questionNumber + 1
+                })
+            }
         }
     }
 
@@ -60,60 +80,67 @@ class QuestionsScreen extends React.Component {
         })
     }
 
-    _renderResponses = (responses) => {
-        let res = [];
-        responses.forEach((response, index) => {
-            let styleToAdd = [styles.option]
-            let styleDesc = {}
-            if (response.Alternative == this.state.response) {
-                styleToAdd.push(styles.selected)
-                styleDesc = styles.textSelected
-            }
-
-            res.push(
-                <TouchableOpacity style={styleToAdd} onPress={() => this.setReply(response.Alternative)} key={index.toString()}>
-                    <Text style={styleDesc}>{response.Description}</Text>
-                </TouchableOpacity>
-            )
-        });
+    _renderRow = ({ item, index }) => {
+        let styleToAdd = [styles.option]
+        let styleDesc = [{ textAlign: 'center' }]
+        if (item.Alternative == this.state.response) {
+            styleToAdd.push(styles.selected)
+            styleDesc.push(styles.textSelected)
+        }
 
         return (
-            <View style={{ alignItems: 'center', flex: 1 }}>
-                {res}
-                <View>
-                    <Button 
-                        color={color} 
-                        title={'RESPONDER'} 
-                        onPress={() => this.reply()}/>
-                </View>
-            </View>
+            <TouchableOpacity style={styleToAdd} onPress={() => this.setReply(item.Alternative)} key={index.toString()}>
+                <Text style={styleDesc}>{item.Description}</Text>
+            </TouchableOpacity>
         )
     }
 
     _renderQuestion = () => {
-        const question = this.props.questions.length == 0 ? null : this.props.questions[this.state.questionNumber] 
+        const question = this.props.questions.length == 0 ? null : this.props.questions[this.state.questionNumber]
+        const buttonDisable = !(this.props.questions.length > this.state.questionNumber && this.state.response)
         if (!this.props.isLoading && question) {
+            let uri
+            if (question.id == 1) {
+                uri = video1
+            } else if (question.id == 2) {
+                uri = video2
+            } else if (question.id == 3) {
+                uri = video3
+            }
+            console.log(uri)
+
             return (
-                <View style={{ flex: 1 }}>
-                    {/* <View style={{ paddingLeft: 20, paddingRight: 20 }}>
-                        <ProgressBarAndroid styleAttr="Horizontal"
-                            indeterminate={false}
-                            progress={0.5}/>
-                    </View> */}
-                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={styles.title}>{question.description}</Text>
-                    </View>
+                <View style={styles.container}>
+                    <Text style={styles.title}>{question.description}</Text>
                     <View style={styles.containerVideo}>
-                        {/* <WebView 
-                            source={{uri: 'https://player.vimeo.com/video/369097167'}}
-                            style={{}}/> */}
-                        <Video 
+                        <Video
                             style={styles.backgroundVideo}
-                            source={{ uri: 'http://s36.filefactory.com/get/f/5isyr3jy7slr/339f3e931ef6615d/Muito_Obrigado.mp4' }}
+                            source={{ uri }}
                             repeat={true}
                             ref={(ref) => { this.player = ref }} />
                     </View>
-                    {this._renderResponses(question.responses)}
+                    <View style={styles.containerList}>
+                        <FlatList
+                            data={question.responses}
+                            keyExtractor={(item, index) => index.toString()}
+                            numColumns={2}
+                            renderItem={this._renderRow} />
+                        <View style={styles.containerButton}>
+                            <TouchableOpacity
+                                style={{
+                                    backgroundColor: color,
+                                    alignItems: 'center',
+                                    padding: 10,
+                                    borderRadius: 70,
+                                    opacity: buttonDisable ? 0.7 : 1
+                                }}
+                                disabled={buttonDisable}
+                                onPress={() => this.reply()}>
+                                <Text style={{ color: 'white' }}>Próximo</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
                 </View>
             )
         } else {
@@ -144,6 +171,8 @@ const mapStateToProps = ({ questions }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     getQuestions: () => dispatch(getQuestions()),
+    putQuestions: (p) => dispatch(putQuestions(p)),
+    setMessage: (title, text) => dispatch(setMessage({ title, text }))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionsScreen)

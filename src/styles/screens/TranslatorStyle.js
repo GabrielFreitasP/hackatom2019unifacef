@@ -7,10 +7,11 @@ export default ()  => StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
     },
-    containerVideo: {        
+    containerVideo: {
+        alignItems: 'center',
         justifyContent: 'center',
-        width: 268,
-        height: 201,
+        width: 240,
+        height: 180,
     },
     backgroundVideo: {
         position: 'absolute',
@@ -18,6 +19,11 @@ export default ()  => StyleSheet.create({
         left: 0,
         bottom: 0,
         right: 0,
+    },
+    textInfo: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
     containerInput: {
         width: '100%',

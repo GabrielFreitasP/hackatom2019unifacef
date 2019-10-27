@@ -4,6 +4,7 @@ import {
 } from './actionTypes'
 import axios from 'axios'
 import { setMessage } from './message'
+import { getRanking } from './ranking'
 
 const URL_BASE = 'http://10.0.4.115:8081/api/v1'
 
@@ -30,6 +31,22 @@ export const getQuestions = () => async dispatch => {
             dispatch(setMessage({
                 title: 'Erro',
                 text: `Ocorreu um erro inesperado!`
+            }))
+        })
+}
+
+export const putQuestions = (point) => async (dispatch, getState) => {
+    const { user } = getState()
+    console.log('putting points questions...')
+    console.log(`${URL_BASE}/point/${point}/user/${user.id}`)
+    axios.put(`${URL_BASE}/point/${point}/user/${user.id}`, {})
+        .then(({ data }) => {
+            dispatch(getRanking())
+        })
+        .catch(err => {
+            dispatch(setMessage({
+                title: 'Erro',
+                text: `Falha ao gravar pontos!`
             }))
         })
 }

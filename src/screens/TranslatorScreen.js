@@ -5,29 +5,32 @@ import {
     View,
     TextInput,
     ActivityIndicator,
-    Button, 
-    Text
+    Button,
+    Text,
+    TouchableOpacity
 } from 'react-native'
 import Video from 'react-native-video'
 import Header from '../components/Header'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { translate, clearTranslator } from '../store/actions/translator'
 
 const color = '#08b3aa'
 
 class TranslatorScreen extends React.Component {
-    static navigationOptions = { header: null }    
+    static navigationOptions = { header: null }
 
-    constructor(props){
+    constructor(props) {
         super(props)
 
-        this.state = {            
-            text: 'Hackaton'
+        this.state = {
+            text: 'Hackaton',
+            paused: false
         }
     }
 
     componentDidMount = () => {
         this.props.clearTranslator()
-        // this.translate(this.state.text)
+        this.setState({ paused: false })
     }
 
     translate = (text) => {
@@ -44,28 +47,57 @@ class TranslatorScreen extends React.Component {
         this.translate(this.state.text)
     }
 
+    renderPause = () => {
+        if (this.state.paused) {
+            return (
+                <Icon size={25} name='play' />
+            )
+        } else {
+            return (
+                <Icon size={25} name='pause' />
+            )
+        }
+    }
+
     renderVideo = () => {
-        if (this.props.translator) {            
+        const text = 'Digite algo a baixo para traduzir em libras'
+        if (this.props.translator) {
             if (this.props.translator.isLoading) {
                 return (
-                    <ActivityIndicator size="large" />
+                    <View style={styles.containerVideo}>
+                        <ActivityIndicator size="large" />
+                    </View>
                 )
             } else if (this.props.translator.url) {
                 return (
-                    <Video 
-                        style={styles.backgroundVideo}
-                        source={{ uri: this.props.translator.url }}
-                        repeat={true}
-                        ref={(ref) => { this.player = ref }} />
+                    <View>
+                        <View style={styles.containerVideo}>
+                            <Video
+                                style={styles.backgroundVideo}
+                                source={{ uri: this.props.translator.url }}
+                                repeat={true}
+                                ref={(ref) => { this.player = ref }}
+                                maxBitRate={2000000}
+                                paused={this.state.paused}
+                                fullscreen={true} />
+                        </View>
+                        <TouchableOpacity onPress={() => { this.setState({ paused: !this.state.paused }) }}>
+                            {this.renderPause()}
+                        </TouchableOpacity>
+                    </View>
                 )
             } else {
                 return (
-                    <Text>Digite algo a baixo para traduzir em libras</Text>
+                    <View style={styles.containerVideo}>
+                        <Text style={styles.textInfo}>{text}</Text>
+                    </View>
                 )
             }
         } else {
             return (
-                <Text>Digite algo a baixo para traduzir em libras</Text>
+                <View style={styles.containerVideo}>
+                    <Text style={styles.textInfo}>{text}</Text>
+                </View>
             )
         }
     }
@@ -75,11 +107,10 @@ class TranslatorScreen extends React.Component {
             <View style={{ flex: 1 }}>
                 <Header title="Tradutor" color={color} />
                 <View style={styles.container}>
-                    <View style={styles.containerVideo}>
-                        { this.renderVideo() }
-                    </View>
+                    {this.renderVideo()}
                     <View style={styles.containerInput}>
                         <TextInput
+                            placeholder={'Digite o que deseja traduzir aqui...'}
                             style={styles.input}
                             onChangeText={text => this.onChangeText(text)}
                             value={this.state.text} />
