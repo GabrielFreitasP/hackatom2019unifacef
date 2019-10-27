@@ -76,6 +76,7 @@ class TranslatorScreen extends React.Component {
                         value={this.state.text} />
                     <Button 
                         style={styles.button}
+                        color={'#08b3aa'}
                         title="Traduzir"
                         onPress={() => this.onPress()} />
                 </View>                

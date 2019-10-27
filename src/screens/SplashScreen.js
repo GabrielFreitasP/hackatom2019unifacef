@@ -24,7 +24,11 @@ class SplashScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.props.navigation.navigate('SignIn');
+        if (this.props.user.id) {
+            this.props.navigation.navigate('Home');
+        } else {
+            this.props.navigation.navigate('SignIn');
+        }
     }
 
     render() {
@@ -38,10 +42,11 @@ class SplashScreen extends React.Component {
 
 const styles = Styles()
 
-const mapStateToProps = () => ({
+const mapStateToProps = ({ user }) => ({
+    user
 })
 
 const mapDispatchToProps = dispatch => ({
 })
 
-export default connect(null, null)(SplashScreen)
+export default connect(mapStateToProps, null)(SplashScreen)

@@ -15,9 +15,8 @@ class HomeScreen extends React.Component {
 
     render() {
         return (
-            <View>
-                <Text>Hackathon 2019</Text>
-                <Button title="Tradutor" onPress={() => this.props.navigation.navigate('Translator')} />
+            <View style={{ flex: 1 }}>
+                
             </View>
         )
     }

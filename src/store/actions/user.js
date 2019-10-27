@@ -23,17 +23,19 @@ const _loading = (isLoading) => ({
 })
 
 export const login = loginData => async dispatch => {
-    dispatch(loading(true))
-    
-    axios.post(`${URL_BASE}/login`, {
+    dispatch(_loading(true))
+    const data = {
         email: loginData.email,
         password: loginData.password
-    })
-        .then(({ data }) => {
-            dispatch(_setUser(data))
+    }
+    axios.post(`${URL_BASE}/login`, data)
+        .then(({ data: { records } }) => {
+            console.log('logged')
+            dispatch(_setUser(records))
             dispatch(_loading(false))
         })
         .catch(err => {
+            console.log(err)
             dispatch(_loading(false))
             if (err.developerMessage) {
                 dispatch(setMessage({

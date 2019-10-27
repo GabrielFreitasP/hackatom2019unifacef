@@ -17,8 +17,18 @@ class SignInScreen extends React.Component {
         super(props)
 
         this.state = {
-            email: '',
-            password: ''
+            email: 'marcelo@gmail.com',
+            password: '123'
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.user.isLoading && this.props.user.isLoading == false) {
+            this.loadingButton.showLoading(false);
+        }
+        if (prevProps.user.id == null && this.props.user.id != null) {
+            console.log('redirect');
+            this.props.navigation.navigate('Home');
         }
     }
 
