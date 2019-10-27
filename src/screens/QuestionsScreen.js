@@ -5,8 +5,11 @@ import {
     Text,
     Button
 } from 'react-native'
+import Header from '../components/Header'
 
-class HomeScreen extends React.Component {
+const color = '#f43973'
+
+class QuestionsScreen extends React.Component {
     static navigationOptions = { header: null }
 
     constructor(props){
@@ -16,7 +19,10 @@ class HomeScreen extends React.Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                
+                <Header title="Perguntas" color={color} />
+                <View>
+                    <Text>Perguntas</Text>
+                </View>
             </View>
         )
     }
@@ -28,4 +34,4 @@ const mapStateToProps = () => ({
 const mapDispatchToProps = (dispatch) => ({
 })
 
-export default connect(null, null)(HomeScreen)
+export default connect(null, null)(QuestionsScreen)
