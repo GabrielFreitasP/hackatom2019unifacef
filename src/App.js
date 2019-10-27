@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Navigator from './Navigator'
 import { Alert } from 'react-native'
+import { setMessage } from './store/actions/message'
 
 class App extends Component {
     componentDidUpdate = () => {

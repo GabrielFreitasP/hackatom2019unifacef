@@ -19,6 +19,7 @@ class RankingScreen extends React.Component {
 
     constructor(props){
         super(props)
+        this._bootstrap()
     }
 
     _bootstrap = () => {
@@ -75,7 +76,7 @@ class RankingScreen extends React.Component {
     }
 }
 
-const styles = Styles('#822fa8')
+const styles = Styles()
 
 const mapStateToProps = ({ ranking }) => ({
     ranking: ranking.data,

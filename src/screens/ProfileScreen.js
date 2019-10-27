@@ -18,11 +18,8 @@ class ProfileScreen extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.user.isLoading && this.props.user.isLoading == false) {
-            this.loadingButton.showLoading(false);
-        }
         if (prevProps.user.id != null && this.props.user.id == null) {
-            this.props.navigation.navigate('SingIn');
+            this.props.navigation.navigate('SignIn');
         }
     }
 
@@ -35,7 +32,6 @@ class ProfileScreen extends React.Component {
         if (this.props.user.photo && this.props.user.photo != '') {
             user = { uri: this.props.user.photo }
         }
-        console.log(user);
         return (
             <>
                 <View style={{ flex: 1 }}>
@@ -55,7 +51,7 @@ class ProfileScreen extends React.Component {
                 
                 <View style={styles.containerScrollView} vertical>
                     <View style={styles.containerExit}>
-                        <TouchableOpacity style={styles.containerButtonBottom} onPress={this._logout}>
+                        <TouchableOpacity style={styles.containerButtonBottom} onPress={this.logout}>
                             <Icon name='sign-out' size={20} color={'#822fa8'} style={styles.iconButton} />
                             <Text style={{...styles.font16, color: '#822fa8' }}>SAIR</Text>
                         </TouchableOpacity>

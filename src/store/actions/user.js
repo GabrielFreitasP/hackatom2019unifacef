@@ -23,7 +23,7 @@ const _loading = (isLoading) => ({
 })
 
 export const logout = () => dispatch => {
-    dispatch(_removeUser)
+    dispatch(_removeUser())
 }
 
 export const login = loginData => async dispatch => {

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-export default (colorPrimary) => StyleSheet.create({
+export default () => StyleSheet.create({
     lineTransaction: {
         width: '100%',
         paddingLeft: 30,
