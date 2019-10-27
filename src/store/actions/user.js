@@ -22,6 +22,10 @@ const _loading = (isLoading) => ({
     payload: isLoading
 })
 
+export const logout = () => dispatch => {
+    dispatch(_removeUser)
+}
+
 export const login = loginData => async dispatch => {
     dispatch(_loading(true))
     const data = {

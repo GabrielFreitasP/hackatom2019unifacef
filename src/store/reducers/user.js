@@ -22,8 +22,8 @@ const reducer = (state = initialState, action) => {
                 id: action.payload.id,
                 name: action.payload.name,
                 email: action.payload.email,
-                photo: action.payload.photo,
-                points: action.payload.points,
+                photo: action.payload.Photo,
+                points: action.payload.Points,
                 password: ''
             }
         case REMOVE_USER:

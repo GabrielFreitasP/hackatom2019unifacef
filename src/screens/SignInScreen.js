@@ -7,7 +7,7 @@ import {
     TextInput
 } from 'react-native'
 import AnimateLoadingButton from 'react-native-animate-loading-button'
-import Styles from '../styles/screens/SignInScreen'
+import Styles from '../styles/screens/SignInStyle'
 import { login } from '../store/actions/user'
 
 class SignInScreen extends React.Component {
@@ -27,7 +27,7 @@ class SignInScreen extends React.Component {
             this.loadingButton.showLoading(false);
         }
         if (prevProps.user.id == null && this.props.user.id != null) {
-            console.log('redirect');
+            console.log(this.props.user)
             this.props.navigation.navigate('Home');
         }
     }

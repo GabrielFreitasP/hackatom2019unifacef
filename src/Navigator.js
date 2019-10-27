@@ -2,7 +2,7 @@ import React from 'react'
 import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import SplashScreen from './screens/SplashScreen'
 import SignInScreen from './screens/SignInScreen'
 import HomeScreen from './screens/HomeScreen'
