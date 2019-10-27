@@ -8,8 +8,8 @@ import {
     TouchableOpacity,
     Button
 } from 'react-native'
-import { WebView } from 'react-native-webview'
-// import Video from 'react-native-video'
+// import { WebView } from 'react-native-webview'
+import Video from 'react-native-video'
 import Header from '../components/Header'
 import Styles from '../styles/screens/QuestionsStyle'
 import { getQuestions } from '../store/actions/questions'
@@ -29,7 +29,21 @@ class QuestionsScreen extends React.Component {
     }
 
     componentDidMount() {
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
         this.props.getQuestions()
+    }
+    
+    componentWillUnmount() {
+        this.backHandler.remove()
+    }
+
+    handleBackPress = () => {
+        this.goBack(); // works best when the goBack is async
+        return true;
+    }
+      
+    goBack = () => {
+        this.props.navigation.navigate('Tabs')
     }
 
     reply = () => {
@@ -90,17 +104,16 @@ class QuestionsScreen extends React.Component {
                         <Text style={styles.title}>{question.description}</Text>
                     </View>
                     <View style={styles.containerVideo}>
-                        <WebView 
+                        {/* <WebView 
                             source={{uri: 'https://player.vimeo.com/video/369097167'}}
-                            style={{}}/>
+                            style={{}}/> */}
+                        <Video 
+                            style={styles.backgroundVideo}
+                            source={{ uri: 'http://s36.filefactory.com/get/f/5isyr3jy7slr/339f3e931ef6615d/Muito_Obrigado.mp4' }}
+                            repeat={true}
+                            ref={(ref) => { this.player = ref }} />
                     </View>
                     {this._renderResponses(question.responses)}
-                </View>
-            )
-        } else if (!question) {
-            return (
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={styles.title}>Todas questões respondidas</Text>
                 </View>
             )
         } else {
@@ -108,23 +121,6 @@ class QuestionsScreen extends React.Component {
                 <ActivityIndicator size="large" />
             )
         }
-    }
-
-    componentDidMount() {
-        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    }
-    
-    componentWillUnmount() {
-        this.backHandler.remove()
-    }
-
-    handleBackPress = () => {
-        this.goBack(); // works best when the goBack is async
-        return true;
-    }
-      
-    goBack = () => {
-        this.props.navigation.navigate('Tabs')
     }
 
     render() {
